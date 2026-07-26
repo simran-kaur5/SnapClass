@@ -1,26 +1,46 @@
 import streamlit as st
-from src.screens.home_screen import home
-from src.screens.student_screen import student
-from src.screens.teacher_screen import teacher
-from src.components.header import header_home
-from src.ui.base_layout import home_background,base_style
+from src.screens.home_screen import home_screen
+from src.screens.student_screen import student_screen
+from src.screens.teacher_screen import teacher_dashboard
+from src.ui.base_layout import (
+    style_base_layout,
+    style_background_home,
+    style_background_dashboard
+)
+from src.components.auto_enroll import auto_enroll_dialog
 
-base_style()
-home_background()
-
+style_base_layout()
 
 def main():
 
-    if 'login_type' not in st.session_state:
-        st.session_state['login_type'] = None
-    
-    if st.session_state['login_type'] == "teacher":
-        teacher()
+    st.set_page_config(
+        page_title="SnapClass - Making Attendance faster using AI",
+        page_icon="https://i.ibb.co/YTYGn5qV/logo.png"
+    )
 
-        
-    elif st.session_state['login_type'] == "student":
-        student()
+    if "login_type" not in st.session_state:
+        st.session_state["login_type"] = None
+
+    if st.session_state["login_type"] == "teacher":
+        style_background_dashboard()
+        teacher_dashboard()
+
+    elif st.session_state["login_type"] == "student":
+        student_screen()
+
     else:
-        home()
+        style_background_home()
+        home_screen()
+
+    join_code = st.query_params.get("join-code")
+    
+    if join_code:
+        if st.session_state.login_type !="student":
+            st.session_state.login_type = "student"
+            st.rerun()
+
+        if st.session_state.get("is_logged_in") and st.session_state.get("user_role")=="student":
+            auto_enroll_dialog(join_code)
+
 
 main()
