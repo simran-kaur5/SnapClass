@@ -1,16 +1,16 @@
-# framework => UI interface
+# Framework
 streamlit
 
 # Utilities
 numpy
 pandas
 
-# Face recognition
+# Machine Learning
 scikit-learn
+
+# Face recognition
 dlib-bin
 face-recognition
-git+https://github.com/ageitgey/face_recognition_models
-setuptools<81
 
 # Database
 supabase
@@ -29,3 +29,5 @@ librosa
 
 # Voice embeddings
 resemblyzer
+
+setuptools<81
