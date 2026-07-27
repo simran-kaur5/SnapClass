@@ -44,17 +44,16 @@ def student_dashboard():
     
     state_map = {} # will store attendance stats
 
+    state_map = {}
+
     for log in logs:
         sid = log["subject_id"]
 
-        if sid not in state_map:
-            # means sid=> 1 has total,attended
-            state_map[sid] = {"total":0,"attendance":0}
+        state_map[sid] = {
+            "total": log["total_classes"],
+            "attendance": log["attended_classes"]
+        }
 
-        state_map[sid]['total']+=1
-
-        if log.get("is_present"):
-            state_map[sid]["attendance"]+=1
 
     
     cols= st.columns(2)
@@ -66,9 +65,16 @@ def student_dashboard():
         stats = state_map.get(sid,{"total":0,"attendance":0})
 
         def unroll_button(subject_id):
-            if st.button("Unenroll from this course",type="tertiary",key=f"unenroll_{sub['subject_id']}",width="stretch",icon=":material/delete_forever:"):
+            if st.button(
+                "Unenroll from this course",
+                type="tertiary",
+                key=f"unenroll_{subject_id}",
+                width="stretch",
+                icon=":material/delete_forever:"
+            ):
                 unenroll_student_subject(subject_id, student_id)
-                st.toast("Unrolled from the course")
+                st.toast("Unenrolled from the course")
+                st.rerun()
         with cols[i%2]:
 
             subject_card(

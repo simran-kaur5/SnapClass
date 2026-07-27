@@ -52,19 +52,19 @@ def teacher_screen():
 
     with tab1:
         type1 = "primary" if st.session_state.current_teacher_tab == "attendance_take" else "tertiary"
-        if st.button("Take Attendance",type="primary",width="stretch",icon=":material/ar_on_you:"):
+        if st.button("Take Attendance",type=type1,width="stretch",icon=":material/ar_on_you:"):
             st.session_state.current_teacher_tab = "attendance_take"
             st.rerun()
     
     with tab2:
         type1 = "primary" if st.session_state.current_teacher_tab == "manage_sub" else "tertiary"
-        if st.button("Manage Subjects",type="primary",width="stretch",icon=":material/book_ribbon:"):
+        if st.button("Manage Subjects",type=type1,width="stretch",icon=":material/book_ribbon:"):
             st.session_state.current_teacher_tab = "manage_sub"
             st.rerun()
     
     with tab3:
         type1 = "primary" if st.session_state.current_teacher_tab == "attendance_records" else "tertiary"
-        if st.button("Attendance Records",type="primary",width="stretch",icon=":material/cards_stack:"):
+        if st.button("Attendance Records",type=type1,width="stretch",icon=":material/cards_stack:"):
             st.session_state.current_teacher_tab = "attendance_records"
             st.rerun()
 
@@ -289,59 +289,61 @@ def teacher_tab_manage_subjects():
         return
     
     st.markdown("""
-<style>
-[data-testid="stVerticalBlockBorderWrapper"] {
-    background-color: white;
-    border-radius: 12px;
-    padding: 20px;
-}
-</style>
-""", unsafe_allow_html=True)
+        <style>
+
+        div[data-testid="stVerticalBlockBorderWrapper"] {
+            background-color: white !important;
+            border-radius: 16px !important;
+            padding: 20px !important;
+            border: 1px solid #e5e7eb !important;
+        }
+
+        </style>
+        """, unsafe_allow_html=True)
 
     for subject in subjects:
 
         total_students = len(subject["subject_students"])
-
+        total_classes = len(subject["attendance_sessions"])
 
         with st.container(border=True):
-            
 
-            st.subheader(subject["name"])
+            st.subheader(f"{subject['name']}")
 
-            c1, c2 = st.columns(([4, 2]))
+            c1, c2 = st.columns(2)
 
             with c1:
                 st.write(f"**Code:** {subject['subject_code']}")
-                st.write(f"**Section:** {subject['section']}")
 
             with c2:
+                st.write(f"**Section:** {subject['section']}")
+
+
+            c3, c4 = st.columns(2)
+
+            with c3:
                 st.write(f"👨‍🎓 Students: {total_students}")
 
-            b1, b2, b3 ,b4= st.columns(4,vertical_alignment="bottom")
-
-            with b1:
-                total_students = len(subject["subject_students"])
-                st.write(f"👨‍🎓 Students: {total_students}")
-
-            with b2:
-                total_classes = len(subject["attendance_sessions"])
+            with c4:
                 st.write(f"Classes Taken: {total_classes}")
 
-            with b3:
-                if st.button("Edit", key=f"edit_{subject['subject_id']}",use_container_width=True):
+
+            b1, b2 = st.columns(2)
+
+            with b1:
+                if st.button(
+                    "Edit",
+                    key=f"edit_{subject['subject_id']}",
+                ):
                     edit_subject_dialog(subject)
 
-            with b4:
+            with b2:
                 if st.button(
                     "Delete",
                     key=f"delete_{subject['subject_id']}",
                 ):
-                    delete_subject_dialog(subject)
-
-        if st.button(f"Share Code: {subject["name"]}",key=f"sub{subject["subject_code"]}",icon=":material/share:"):
-            share_dailog_button(subject["name"],subject["subject_code"])
-        st.space()   
-            
+                    delete_subject_dialog(subject)  
+                
 
 def teacher_tab_attendance_rec():
     st.header("Records")
@@ -351,6 +353,7 @@ def teacher_tab_attendance_rec():
     records = get_teacher_record(teacher_id)
 
     if not records:
+        st.error("You have not any records")
         return
 
     data = []

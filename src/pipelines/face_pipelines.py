@@ -71,7 +71,7 @@ def get_trained_model():
     if len(X)==0:
         return 0
     
-    svc = SVC(kernel="linear",probability=True,class_weight="balanced") # also returns confidence score
+    svc = SVC(kernel="linear",class_weight="balanced") # also returns confidence score
 
     try:
         svc.fit(X,y)
@@ -125,9 +125,5 @@ def predict_attendance(class_image_np):
         if best_match_score<=resemblance_threshold:
             detected_student[predicted_id] = True
 
-        print(f"Predicted ID: {predicted_id}")
-        print(f"Distance: {best_match_score}")
-        print(f"Threshold: {resemblance_threshold}")
-        print(detected_student)
 
     return  detected_student,all_students,len(encodings)

@@ -1,43 +1,76 @@
 import streamlit as st
 
+
 def subject_card(name, code, section, state, footer_callback=None):
 
-    with st.container():
+    stats = {}
 
-        st.markdown(
-    f"""
-    <h4 style="
-        margin:0;
-        color:#1f2937;
-        font-weight:600;
-    ">
-        📘 {name}
-    </h4>
-    """,
-    unsafe_allow_html=True,
-)
+    for item in state:
+        key, value = list(item.items())[0]
+        stats[key] = value
 
-        c1, c2 = st.columns(2)
 
-        with c1:
-            st.write(f"Code: {code}")
+    html_code = f"""
+<div style="
+background-color:white;
+padding:20px;
+border-radius:16px;
+margin-bottom:20px;
+color:#111827;
+">
 
-        with c2:
-            st.write(f"Sec: {section}")
+<h3 style="color:#1f2937;">
+{name}
+</h3>
 
-        st.divider()
+<p>Code: {code}</p>
 
-        cols = st.columns(2)
+<p>Sec: {section}</p>
 
-        for i, item in enumerate(state):
-            key, value = list(item.items())[0]
+<hr>
 
-            with cols[i % 2]:
-                st.metric(key, value)
+<div style="
+display:flex;
+justify-content:space-around;
+text-align:center;
+">
 
-            if i % 2 == 1 and i != len(state) - 1:
-                cols = st.columns(2)
+<div>
+<b>Total</b>
+<br>
+{stats.get("Total",0)}
+</div>
 
-        if footer_callback:
-            st.divider()
-            footer_callback()
+<div>
+<b>Attended</b>
+<br>
+{stats.get("Attended",0)}
+</div>
+
+<div>
+<b>Absent</b>
+<br>
+{stats.get("Absent",0)}
+</div>
+
+<div>
+<b>Attendance</b>
+<br>
+{stats.get("Attendance","0%")}
+</div>
+
+</div>
+
+</div>
+"""
+
+
+    st.markdown(
+        html_code,
+        unsafe_allow_html=True
+    )
+
+
+    if footer_callback:
+        footer_callback()
+

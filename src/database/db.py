@@ -207,12 +207,16 @@ def get_teacher_record(teacher_id):
         supabase.table("attendance_logs")
         .select("""
             *,
-            attendance_sessions(
+            attendance_sessions!inner(
                 attendance_date,
                 lecture_number,
                 start_time,
                 end_time,
-                subjects(*)
+                subjects!inner(
+                    name,
+                    subject_code,
+                    teacher_id
+                )
             )
         """)
         .eq("attendance_sessions.subjects.teacher_id", teacher_id)

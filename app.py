@@ -26,6 +26,7 @@ def main():
         teacher_dashboard()
 
     elif st.session_state["login_type"] == "student":
+        style_background_dashboard()
         student_screen()
 
     else:
