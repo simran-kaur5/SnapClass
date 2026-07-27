@@ -334,6 +334,7 @@ def teacher_tab_manage_subjects():
                 if st.button(
                     "Edit",
                     key=f"edit_{subject['subject_id']}",
+                    type="primary"
                 ):
                     edit_subject_dialog(subject)
 
@@ -341,8 +342,23 @@ def teacher_tab_manage_subjects():
                 if st.button(
                     "Delete",
                     key=f"delete_{subject['subject_id']}",
+                    type="primary"
                 ):
-                    delete_subject_dialog(subject)  
+                    delete_subject_dialog(subject) 
+
+
+            if st.button(
+                f"Share QR Code",
+                key=f"share_{subject['subject_id']}",
+                icon=":material/share:",
+                type="primary"
+            ):
+                share_dailog_button(
+                    subject["name"],
+                    subject["subject_code"]
+                )
+
+                     
                 
 
 def teacher_tab_attendance_rec():
