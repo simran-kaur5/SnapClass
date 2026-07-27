@@ -1,24 +1,31 @@
+# Framework
 streamlit
-# Utilitites 
+
+# Utilities
 numpy
 pandas
 
-# FACE RECOGNITION
+# Machine Learning
 scikit-learn
+
+# Face Recognition
 dlib-bin
 git+https://github.com/ageitgey/face_recognition_models
 setuptools<70.0.0
 
-
+# Database
 supabase
 bcrypt
 
-
-
+# QR
 segno
+
+# Images
 pillow
 
+# Audio
+librosa==0.11.0
+numba==0.66.0
 
-
-librosa
-resemblyzer
+# Voice
+resemblyzer==0.1.4
