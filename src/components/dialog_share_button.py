@@ -5,7 +5,7 @@ import io
 
 @st.dialog("Share Class Link")
 def share_dailog_button(subject_name,subject_code):
-    app_domain = "smart-snapclass.streamlit.app"
+    app_domain = "https://smart-snapclass.streamlit.app"
     join_url = f"{app_domain}/?join-code={subject_code}"
 
 
