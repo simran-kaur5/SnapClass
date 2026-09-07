@@ -169,7 +169,7 @@ def teacher_tab_take_attendance():
         st.warning("You haven't created any subjects yet! Please create one to begin!")
         return
 
-    subject_options = {f"{s["name"]} - {s["section"]}":s["subject_id"] for s in subjects}  # dictionary comprehension
+    subject_options = {f"{s['name']} - {s['section']}":s['subject_id'] for s in subjects}  # dictionary comprehension
     # key = "DBMS - 1" => value = 1
 
     col1, col2 = st.columns([3,1],vertical_alignment="bottom")

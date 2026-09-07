@@ -27,7 +27,7 @@ def auto_enroll_dialog(join_code):
             st.query_params.clear()
             st.rerun()
         return 
-    st.markdown(f"Would you like to enroll in the **{subject["name"]}**?")
+    st.markdown(f"Would you like to enroll in the **{subject['name']}**?")
 
     col1,col2 = st.columns(2)
 
