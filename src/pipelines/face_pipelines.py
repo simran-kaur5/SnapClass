@@ -44,7 +44,7 @@ def get_face_embeddings(np_image):
 
         encoding.append(np.array(face_descriptor))
 
-    return encoding
+    return encoding 
 
 @st.cache_resource
 # this fun =>Read all students from the database and train an SVM classifier.
