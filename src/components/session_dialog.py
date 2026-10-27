@@ -1,9 +1,10 @@
 import streamlit as st
-from datetime import datetime, timedelta
+from datetime import datetime
+from zoneinfo import ZoneInfo
 
 @st.dialog("Attendance Session")
 def input_session(selected_subject_id):
-    now = datetime.now()
+    now = datetime.now(ZoneInfo("Asia/Kolkata"))
     lecture_number = st.number_input("Lecture Number", min_value=1, step=1)
     
     col1, col2 = st.columns(2)
