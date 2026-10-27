@@ -130,7 +130,7 @@ https://smart-snapclass.streamlit.app/
 
 Landing Page
 
-(Add your landing page URL after deployment)
+https://snap-class-landing-page-pi.vercel.app/
 
 ---
 
@@ -154,31 +154,6 @@ Landing Page
 3. Register Face
 4. Register Voice
 5. View Attendance
-
----
-
-## Future Improvements
-
-- Liveness Detection
-- Attendance Analytics Dashboard
-- Email Notifications
-- Multi-Face Recognition Optimization
-- Mobile Application
-- OCR-based Student Verification
-
----
-
-## Screenshots
-
-You can add screenshots of:
-
-- Home Screen
-- Teacher Dashboard
-- Student Dashboard
-- Face Attendance
-- Voice Attendance
-- QR Enrollment
-- Attendance Records
 
 ---
 
