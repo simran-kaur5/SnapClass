@@ -22,7 +22,6 @@ def save_photo_attendance(results,attendance_logs,session_data):
             if st.button("Confirm & Save",key="image_confirm",width="stretch",type="primary"):
                 try:
                     # 1. Create attendance session
-                    st.write("Session data:", session_data)
                     existing = (
                     supabase.table("attendance_sessions")
                     .select("session_id")
